@@ -1,0 +1,35 @@
+/*
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+.comptray { float: left; width: 170px; margin: 0 4px 0 4px; }
+.component { padding: 4px; font-family: Arial; text-align: center; display: block; text-decoration: none; color: white; }
+.traybtn { border-width: 3px; border-style: outset; font-size: 0.9em; }
+.traybtn:hover { border-color: #F8C929; color: #F8C929; }
+.traybtn:active { border-style: inset; }
+#pageavatar LI { cursor: move; list-style: none; border-width: 2px; border-style: solid; border-color: #555; margin: 4px; }
+#pageavatar LI:hover { border-color: #F8C929; color: #F8C929; }
+.compedit { border: 3px ridge; position: absolute; background: #EEE; padding: 2px; display: none; }
+td.label { text-align: right; }
+.extjs { background: #040; }
+.injs { background: #080; }
+.extcss { background: #930000; }
+.incss { background: #C00; }
+.image { background: #000080; }
+.iframe { background: #606; }
+p.icon { height:12px; width:12px; padding: 0; position:relative; overflow:hidden; }
+img.icon { position:absolute; top:-12px; border: 0; }
+.icons { float:right; position:absolute: top:0px; background: white; }
+.transfer {	border: 1px solid #000;	opacity: 0.3; -moz-opacity: 0.3; filter: alpha(opacity=30); }
+.compdesc { margin: 0 4px 4px 12px; font-size: 0.8em; }
+
