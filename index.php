@@ -192,7 +192,7 @@ function convertDomain($domain) {
 function genUrl($type, $domain, $delay, $jsdelay) {
 	global $gCntr, $ghTypeToSleepType;
 	$type = ( $ghTypeToSleepType[ $type ] ? $ghTypeToSleepType[ $type ] : $type );
-	return "http://$domain/bin/resource.cgi?type=$type&sleep=$delay" . ( $jsdelay ? "&jsdelay=$jsdelay" : "" ) . "&n=$gCntr&t=" . time();
+	return "https://$domain/bin/resource.cgi?type=$type&sleep=$delay" . ( $jsdelay ? "&jsdelay=$jsdelay" : "" ) . "&n=$gCntr&t=" . time();
 }
 function genHtml($type, $domain, $delay, $jsdelay, $bDefer, $bAsync) {
     global $gInlineScriptCntr;
