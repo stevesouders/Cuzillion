@@ -159,7 +159,7 @@ function genResource($drop, $type, $domain, $delay, $construct, $bTimeout, $bOnl
 	// Add this component to the real components in the page in the appropriate droparea.
 	if ( array_key_exists($drop, $ghResources) ) {
 		// To avoid inline script blocking behavior, if we have two adjacent inline blocks, make them a single block.
-		if ( array_key_exists($drop, $ghPrevConstruct) && 
+		if ( array_key_exists($drop, $ghPrevConstruct) &&
 			 ( "docwrite" == $ghPrevConstruct[$drop] || "dom" == $ghPrevConstruct[$drop] || "xhr" == $ghPrevConstruct[$drop] || "xhrinj" == $ghPrevConstruct[$drop] ) &&
 			 ( "docwrite" == $construct || "dom" == $construct || "xhr" == $construct || "xhrinj" == $construct ) ) {
 			if ( preg_match('/^(.*)<\/script>/', $ghResources[$drop], $regs) ) {
@@ -285,7 +285,7 @@ function genDom($type, $domain, $delay, $bTimeout, $bOnload, $jsdelay) {
 	else if ( "iframe" == $type ) {   // iframe
 	    $results .=
 "    var $elemname = document.createElement('iframe');\n" .
-"    $elemname.width = '80%';\n" . 
+"    $elemname.width = '80%';\n" .
 "    $elemname.height = '70';\n" .
 "    $elemname.src = '$url';\n" .
 "    document.body.appendChild($elemname);\n";
@@ -312,20 +312,20 @@ function genIframe($type, $domain, $delay, $bTimeout, $bOnload, $jsdelay) {
 			return "<iframe src='$url' width=0 height=0 frameborder=0 onload='scriptSleepOnload(\"$url\")'></iframe>\n";
 		}
 		else {
-			// more complicated - use a function to create an invisible iframe DOM element, 
+			// more complicated - use a function to create an invisible iframe DOM element,
 			// then call that function either directly, or via setTimeout, or via onload listener.
 			$elemname = "elem$gCntr";
 			return
 				"<script>\n" .
 				"function create_$elemname() {\n" .
 				"    var $elemname = document.createElement('iframe');\n" .
-				"    $elemname.width = '0';\n" . 
+				"    $elemname.width = '0';\n" .
 				"    $elemname.height = '0';\n" .
 				"    $elemname.src = '$url';\n" .
 				( "extjs" == $type ? "    cuz_addHandler($elemname, 'load', function(){scriptSleepOnload('$url');});\n" : "" ) .
 				"    document.body.appendChild($elemname);\n" .
 				"}\n" .
-				genCreateFunctions($elemname, $bTimeout, $bOnload) . 
+				genCreateFunctions($elemname, $bTimeout, $bOnload) .
 				"</script>\n";
 		}
 	}
@@ -355,7 +355,7 @@ function genXhr($type, $domain, $delay, $bTimeout, $bOnload, $jsdelay) {
             "    }\n" .
             "}\n" .
 			insertGetXHRObjectFunction() .
-			genCreateFunctions($elemname, $bTimeout, $bOnload) . 
+			genCreateFunctions($elemname, $bTimeout, $bOnload) .
 			"</script>\n";
 	}
 
@@ -375,9 +375,9 @@ function genXhrInjection($type, $domain, $delay, $bTimeout, $bOnload, $jsdelay) 
             "  xhrObj_$elemname = getXHRObject();\n" .
             "  xhrObj_$elemname.onreadystatechange = function() { if ( xhrObj_$elemname.readyState != 4 || 200 != xhrObj_$elemname.status ) return; " .
 
-			( "extjs" == $type ? 
+			( "extjs" == $type ?
 			  "var se = document.createElement('script'); document.getElementsByTagName('head')[0].appendChild(se); se.text = xhrObj_$elemname.responseText;"
-			  :   
+			  :
 			  // CVSNO - do stylesheet
 			  "var se = document.createElement('script'); document.getElementsByTagName('head')[0].appendChild(se); se.text = xhrObj_$elemname.responseText;"
 			) .
@@ -391,7 +391,7 @@ function genXhrInjection($type, $domain, $delay, $bTimeout, $bOnload, $jsdelay) 
             "  }\n" .
             "}\n" .
 			insertGetXHRObjectFunction() .
-			genCreateFunctions($elemname, $bTimeout, $bOnload) . 
+			genCreateFunctions($elemname, $bTimeout, $bOnload) .
 			"</script>\n";
 }
 function genCreateFunctions($elemname, $bTimeout, $bOnload) {
@@ -428,14 +428,14 @@ function printComponent($type, $domainNum, $delay, $construct, $bTimeout, $bOnlo
 				 ( 'docwrite' == $construct ? " using document.write" :
 				   ( 'dom' == $construct ? " using script DOM element" :
 					 ( 'iframe' == $construct ? " using an iframe" :
-					   ( 'xhr' == $construct ? " using XHR eval" : 
+					   ( 'xhr' == $construct ? " using XHR eval" :
 	                     ( 'xhrinj' == $construct ? " using XHR injection" : " using unknown" ) ) ) ) ) );
 	$sResult .= ( $bDefer ? ("extcss" == $type ? " with @import" : " with defer") : "" );
 	$sResult .= ( $bAsync ? " with async" : "" );
 	$sResult .= ( $bTimeout ? " via setTimeout" : "" );
 	$sResult .= ( $bOnload ? " after onload" : "" );
 
-    return $sResult;							
+    return $sResult;
 }
 function printActualResources($sDrop) {
 	global $ghResources;
@@ -473,7 +473,7 @@ function insertGetXHRObjectFunction() {
 	global $gbGetXHRObjectInserted;
 	if ( ! $gbGetXHRObjectInserted ) {
 		$gbGetXHRObjectInserted = true;
-		return 
+		return
 			"function getXHRObject() {\n" .
             "  var xhrObj = false;\n" .
             "  try {\n" .
@@ -527,7 +527,7 @@ function cuz_addHandler(elem, sType, fn, capture) {
 }
 function doOnload() {
 	var end = Number(new Date());
-<?php 
+<?php
 	if ( 0 < count($ghDrops) ) {
 		echo "    document.getElementById('loadtime').innerHTML = 'page load time: ' + (end - gTop) + ' ms';\n";
 	}
@@ -566,7 +566,7 @@ function scriptSleepOnload(sUrl) {
 		gScriptMsg += msg;
 	}
 }
-<?php 
+<?php
 /*
 function doPreview() {
 // CVSNO - move this to an external script
@@ -620,7 +620,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 <?php echo printActualResources('inhead') ?>
-<?php 
+<?php
 if ( 0 == count($ghDrops) ) {
 	// If no components, automatically load Edit mode.
 	echo "<link rel='stylesheet' type='text/css' href='cuzillion.css'>\n";
@@ -635,7 +635,7 @@ if ( 0 == count($ghDrops) ) {
   <div style="float:right; margin-top: 2px;">
     <a href="help.php" style="color: white; font-size: 0.9em; text-decoration: none;">Help</a>
   </div>
-  <font style="font-size: 2em; font-weight: bold; margin-right: 10px;"><a href="." style="color:white; text-decoration: none;"><img border=0 src="logo-32x32.gif">&nbsp;Cuzillion</a></font><i>'cuz there are a zillion pages to check</i>
+  <font style="font-size: 2em; font-weight: bold; margin-right: 10px;"><a href="." style="color:white; text-decoration: none;"><img border=0 src="logo-32x32.gif">&nbsp;Cuzillion</a></font><i>&apos;cuz there are a zillion pages to check</i>
 </div>
 
 <div id=content style="margin: 8px;">
@@ -674,7 +674,7 @@ if ( 0 == count($ghDrops) ) {
 <div style="position: absolute; left: 560px;">
   <div id=step3text style="text-align: left; margin: 0 0 4px 4px; height: 50px; padding-top: 12px;"></div>
   <div id=pagesubmit style="text-align: left;">
-<?php 
+<?php
 if ( 0 < count($ghDrops) ) {
 ?>
 <nobr>
@@ -689,7 +689,7 @@ if ( array_key_exists('sks', $_GET) ) { // for now hide the Save button
 }
 ?>
 </nobr>
-<?php 
+<?php
 }
 ?>
  </div>
@@ -700,7 +700,7 @@ if ( array_key_exists('sks', $_GET) ) { // for now hide the Save button
 
 </div> <!-- content -->
 
-<?php 
+<?php
 if ( 0 == count($ghDrops) ) {
 	// If no components, automatically load Edit mode.
 	echo "<script src='cuzillion.js'></script>\n";
