@@ -78,19 +78,19 @@ $ghCharToDomain = array(
 	);
 
 $ghTypeToString = array(
-	extjs => 'external script',
-	injs => 'inline script block',
-	extcss => 'external stylesheet',
-	incss => 'inline style block',
-	image => 'image',
-	iframe => 'iframe'
+	'extjs' => 'external script',
+	'injs' => 'inline script block',
+	'extcss' => 'external stylesheet',
+	'incss' => 'inline style block',
+	'image' => 'image',
+	'iframe' => 'iframe'
 	);
 
 $ghTypeToSleepType = array(
-	extjs => 'js',
-	extcss => 'css',
-	image => 'gif',
-	iframe => 'html'
+	'extjs' => 'js',
+	'extcss' => 'css',
+	'image' => 'gif',
+	'iframe' => 'html'
 	);
 
 
